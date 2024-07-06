@@ -10,7 +10,7 @@ data.table(
     theme_test() + 
     labs(x='E.nodal.wt (thres 0.25)', y='Beta', 
          title='Spearman r(274)=-0.452') +
-    theme(axis.title.x = element_text(size = 36),
-          axis.title.y = element_text(size = 36),
+    theme(axis.title.x = element_text(size = 30),
+          axis.title.y = element_text(size = 30),
           axis.text = element_text(size=24),
-        plot.title = element_text(size = 36, hjust = 0.5, face='bold'))  
+        plot.title = element_text(size = 32, hjust = 0.5, face='bold'))  
