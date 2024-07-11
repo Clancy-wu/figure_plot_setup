@@ -434,3 +434,65 @@ ggplot(df, aes(x=Topo, y=Beta)) +
   theme(axis.title.x = element_text(size = 30),
         axis.title.y = element_text(size = 30),
         axis.text = element_text(size=30) )  
+
+
+##############
+# 0.05, 0.3
+blue_to_green <- function(n) { colorRampPalette(c("#00FE80", "#0003BF", 'red', 'yellow'))(n) }
+value_to_color <- function(value, min_value=-0.45, max_value=0.45, palette_function=blue_to_green, n_colors = 100) {
+  if (value < min_value) value <- min_value
+  if (value > max_value) value <- max_value
+  scaled_value <- round((value - min_value) / (max_value - min_value) * (n_colors - 1)) + 1
+  colors <- palette_function(n_colors)
+  return(colors[scaled_value])
+}
+sig_pos <- sig_full_info %>%
+  arrange(desc(zvalue)) %>%
+  slice_head(n=10)
+sig_pos <- sig_pos  %>%
+  mutate(color = sapply(zvalue, value_to_color))
+
+sig_pos %>%
+  .[, c('zvalue', 'name', 'color')] %>%
+  mutate(name = factor(name, levels = name[order(zvalue)])) %>%
+  ggplot(.) +
+  #geom_bar(stat='identity', color='#406AF2', fill='#98C8F2', size=1.5, width=.6) +
+  geom_bar(aes(x=zvalue, y=name, fill=color), stat='identity', size=1.5, width=.6) +
+  theme_classic() +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_fill_identity() +
+  labs(x='', y='') +
+  theme(
+    plot.margin = unit(c(1, 1, 1, 1), "cm"),
+    text = element_text(family = "Times New Roman"),
+    axis.title.x = element_text(size = 30),
+    axis.title.y = element_text(size = 40),
+    axis.text = element_text(size=24),
+    legend.position = 'n')
+
+
+sig_neg <- sig_full_info %>%
+  arrange(tvalue) %>%
+  slice_head(n=10)
+sig_neg <- sig_neg %>%
+  mutate(color=sapply(zvalue, value_to_color))
+
+sig_neg %>%
+  .[, c('zvalue', 'name', 'color')] %>%
+  mutate(name = factor(name, levels = name[order(zvalue)])) %>%
+  ggplot(.) +
+  geom_bar(aes(x=zvalue, y=name, fill=color), stat='identity', size=1.5, width=.6) +
+  theme_classic() +
+  scale_x_continuous(expand = c(0,0) ) +
+  scale_fill_identity() +
+  scale_y_discrete(position = 'right') +
+  labs(x='', y='') +
+  theme(
+    plot.margin = unit(c(1, 1, 1, 1), "cm"),
+    text = element_text(family = "Times New Roman"),
+    axis.title.x = element_text(size = 30),
+    axis.title.y = element_text(size = 40),
+    axis.text = element_text(size=24),
+    legend.position = 'n')
+
+
