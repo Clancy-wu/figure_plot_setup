@@ -20,3 +20,24 @@ summary(interaction_model)
 library(emmeans)
 posthoc <- emmeans(ancova_model, pairwise ~ group)
 summary(posthoc)
+
+#######################################################
+## LME
+library(afex)
+roi_table = data.frame(site = data$site, subject = data$subject, value = data[[roi]])
+# method S: the Satterthwaite approximation for degrees of freedom
+# methods PB and LRT will make a pvalue same as the matlab lme function.
+mod <- afex::lmer_alt(value ~ site + (1|subject), data=roi_table, method="PB")
+mod_result = summary(mod)
+# main effect: F test
+F_test = anova(mod)
+stat_Ftest[1, roi] = F_test$`F value`
+stat_Ftest[2, roi] = F_test$`Pr(>F)`
+# estimate value: beta
+stat_beta[, roi] = mod_result$coefficients[, 'Estimate']
+# statistic value: t value
+stat_t[, roi] = mod_result$coefficients[, 't value']
+# p value
+stat_p[, roi] = mod_result$coefficients[, 'Pr(>|t|)']
+
+
