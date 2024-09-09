@@ -58,7 +58,7 @@ obj_df = pd.read_csv("/home/clancy/Desktop/dti_dlpfc_amyg/Tmap/nii2mesh_20_rh_dl
 obj_coord = obj_df[obj_df[0]=='v']
 coord = np.array(obj_coord.loc[:, [1, 2, 3]]) # 4413, 3
 
-nifti_file = 'RH_aMFG-pMFG_Tmap_fsl1mm.nii.gz'
+nifti_file = 'Tmap/RH_aMFG-pMFG_Tmap_1mm.nii.gz'
 nifti_img = image.load_img(nifti_file)
 from nibabel.affines import apply_affine
 def coord_to_voxel(coord):
@@ -69,7 +69,7 @@ def voxel_to_value(voxel):
     data = nifti_img.get_fdata()
     return data[tuple(voxel)]
 voxel_value = np.apply_along_axis(voxel_to_value, 1, result) # (4416, 1)
-final_df = pd.DataFrame(result, columns=['X', 'Y', 'Z'])
+final_df = pd.DataFrame(coord, columns=['X', 'Y', 'Z'])
 final_df['Value'] = voxel_value[:, 0]
 final_df.to_csv('nii2mesh_20_rh_dlpfc_rh_amyg_80_mask.csv', index=None)
 
