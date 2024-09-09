@@ -30,7 +30,7 @@ df.to_csv('coordinates_and_values.csv', index=False)
 
 print("CSV file saved as 'coordinates_and_values.csv'")
 
-#############################3
+#############################
 ## simple method
 import nibabel as nib
 import numpy as np
@@ -48,8 +48,13 @@ def nii_to_points(nifti_file):
     df = df[~np.isnan(df['Value'])]
     return df
 
+#############################
+## python read obj
+import pandas as pd
+obj_df = pd.read_csv("/home/clancy/Desktop/dti_dlpfc_amyg/Tmap/nii2mesh_20_rh_dlpfc_rh_amyg_80_mask.obj", header=None, delimiter=' ')
+obj_df[obj_df[0]=='v'] # vertex
+obj_df[obj_df[0]=='f'] # faces
 
-    
     
     
     
