@@ -13,6 +13,7 @@ data.table(
     theme(axis.title.x = element_text(size = 30),
           axis.title.y = element_text(size = 30),
           axis.text = element_text(size=24),
+          #plot.margin = margin(1, 1, 1, 1, "in") # if content exceed panel, add this 
         plot.title = element_text(size = 32, hjust = 0.5, face='bold'))  
 
 color_code <- c("#1F77B4E5", "#FF7F0EE5", "#2CA02CE5", "#D62728E5", "#9467BDE5", "#8C564BE5", "#E377C2E5", "#7F7F7FE5", "#BCBD22E5", "#17BECFE5", "#AEC7E8E5")
