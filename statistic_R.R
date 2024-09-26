@@ -42,7 +42,8 @@ stat_p[, roi] = mod_result$coefficients[, 'Pr(>|t|)']
 
 #######################################################
 ## LME + post_hoc
-mod <- afex::lmer_alt(value ~ 1+ site + type + site*type + (1|subject), data=df_melt, method="PB")
+#mod <- afex::lmer_alt(value ~ 1+ site + type + site*type + (1|subject), data=df_melt, method="PB") # matlab: based on ttest
+mod <- afex::lmer_alt(value ~ 1+ site + type + site*type + (1|subject), data=df_melt) # R: based on maximum likelihood
 anova(mod) # main effect: F test
 summary(mod)
 # Post-hoc comparisons if needed
