@@ -50,4 +50,11 @@ summary(mod)
 library(emmeans)
 emm <- emmeans(mod, ~ site)
 pairs(emm)
-
+#######################################################
+## LME in python
+import statsmodels.formula.api as smf
+import pandas as pd
+df = pd.DataFrame({'subject':sub_name, 'site':site, 'value':final_value[:,i]})
+model = smf.mixedlm("value ~ site ", df, groups=df['subject'], re_formula='~site')
+result = model.fit()
+result.summary()
