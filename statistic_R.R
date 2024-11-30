@@ -58,3 +58,9 @@ df = pd.DataFrame({'subject':sub_name, 'site':site, 'value':final_value[:,i]})
 model = smf.mixedlm("value ~ site ", df, groups=df['subject'], re_formula='~site')
 result = model.fit()
 result.summary()
+
+#######################################################
+## Permutation
+library(coin)
+group = as.factor(clinic_score$group)
+pvalue(oneway_test(fatigue_thickness$mean ~ group, distribution=approximate(nresample=5000))) # 0.0392
