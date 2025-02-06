@@ -22,27 +22,3 @@ for (i in seq(210)){
 }
 label_xifti <- newdata_xifti(bn, empty_num)
 view_xifti_surface(label_xifti, zlim=c(0,75), color_mode='diverging')
-##############################################
-## make one mask
-# Extract the labels
-selected_area <- ifelse(label_cifti$data == 10, 1, NA)
-view_xifti_surface(
-  xifti = label_cifti,          # Original surface
-  overlay = selected_area,       # Mask for the selected region
-  border_colors = "black",       # Set border color to black
-  color_mode = "qualitative"     # Ensure categorical colormap
-)
-
-## make multiple mask
-overlay_mask <- rep(NA, length(label_cifti$data))  # Initialize empty overlay
-# Assign 1 to label 10 and 2 to label 20
-overlay_mask[label_cifti$data == 10] <- 1  
-overlay_mask[label_cifti$data == 20] <- 2  
-view_xifti_surface(
-  xifti = label_cifti,       
-  overlay = overlay_mask,      
-  border_colors = c("black", "red"),  # Black for area 1, Red for area 2
-  color_mode = "qualitative"
-)
-border_colors = "black"
-view_xifti_surface(label_cifti, overlay = overlay_mask, border_colors = c("black", "red"), overlay_alpha = 0.8)
