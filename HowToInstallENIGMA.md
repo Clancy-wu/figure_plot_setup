@@ -9,7 +9,7 @@ pip install numpy
 pip install scipy  
 pip install scikit-learn  
 pip install matplotlib  
-pip install vtk=9.3.1 # vtk should exactly be 9.3.1  
+pip install vtk==9.3.1 # vtk should exactly be 9.3.1  
 pip install nibabel  
 pip install pillow  
 pip install pandas  
