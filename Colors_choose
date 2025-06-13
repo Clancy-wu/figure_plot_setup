@@ -1,1 +1,12 @@
 
+# deep blue, blue, green ,deep green
+blue_to_green <- function(n) { colorRampPalette(c("#00FE80", "#0003BF", 'red', 'yellow'))(n) }
+
+# workbench colormap
+colFn_wbview = colorRampPalette(rev(c("#ffff00", "#ffc800", "#ff7800", '#ff0000',
+                                  '#c80000', '#960000', '#640000', '#3c0000',
+                                  '#000050', '#0000aa', '#4b007d', '#7d00a0', 
+                                  '#4b7d00', '#00c800', '#00ff00', '#00ffff')));
+
+# blue red
+colFn_blue_red = colorRampPalette(c("#013e7d", "#FFFFFF", "#760715")); red blue
